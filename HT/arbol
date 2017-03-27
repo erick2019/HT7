@@ -1,0 +1,73 @@
+/**
+ * @author Erick Hernandez Chacon / 16668
+ */
+
+
+public class ArbolBinario<A extends Comparable<A>> implements Comparable<ArbolBinario<A>>{
+		
+	private Nodo<A> primero;
+	
+	public ArbolBinario(){
+		primero = null;
+	}
+	
+	public ArbolBinario( A objeto ){
+		primero = new Nodo<A>( objeto );
+	}
+	
+	public ArbolBinario( Nodo<A> n ){
+		primero = n;
+	}
+	
+	public ArbolBinario( ArbolBinario<A> a ){
+		primero = a.primero;
+	}
+	
+	public void insertar( A nuevo ){
+		if( isEmpty() ) primero = new Nodo<A>(nuevo);
+		else primero.setHijo( nuevo );
+	}
+	
+	public void insertar( ArbolBinario<A> nuevo ){
+		if( isEmpty() ) primero = nuevo.darPrimero();
+		else primero.setHijo( nuevo.darPrimero() );
+	}
+	
+	public boolean isEmpty(){
+		return primero == null;
+	}
+	
+	public int size(){
+		if( isEmpty() ) return 0;
+		else
+			return primero.cantidadHijos();
+	}
+	
+	public int altura(){
+		if( isEmpty() ) return 0;
+		else
+			return primero.altura();
+	}
+
+	public A buscar( A objeto ){
+		if( isEmpty() ) return null;
+		return primero.buscar( objeto );
+	}
+	
+	public Nodo<A> darPrimero(){
+		return primero;
+	}
+
+	@Override
+	public int compareTo(ArbolBinario<A> o) {
+		return primero.compareTo( o.primero );
+	}
+
+	public void setLeft( ArbolBinario<A> a ){
+		primero.setLeft( a.darPrimero() );
+	}
+	
+	public void setRight( ArbolBinario<A> a ){
+		primero.setRight( a.darPrimero() );
+	}
+}
